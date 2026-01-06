@@ -1,0 +1,104 @@
+---
+title: Introduction to Chamely
+description: Welcome to Chamely, the platform designed to help you organize and manage project documentation efficiently in a dedicated space.
+---
+
+## Overview
+
+Chamely provides a centralized space for you to create, organize, and collaborate on project documentation. You streamline workflows by keeping all docs in one intuitive platform, reducing scattered files and version confusion. Access everything from markdown files to interactive guides in a single, searchable hub.
+
+<Callout kind="info">
+  Chamely supports teams of all sizes, from solo developers to enterprise groups.
+</Callout>
+
+## Key Features
+
+Chamely offers powerful tools to enhance your documentation experience. Explore these core capabilities:
+
+<Columns cols={3}>
+  <Card title="Dedicated Spaces" icon="folder" href="#spaces">
+    Create isolated documentation spaces for each project. Organize content hierarchically with folders and pages.
+  </Card>
+  <Card title="Real-time Collaboration" icon="users" href="#collaboration">
+    Invite team members to edit docs simultaneously. Track changes with version history and comments.
+  </Card>
+  <Card title="Rich Editing" icon="edit-3" href="#editing">
+    Use markdown, embeds, and custom components. Preview changes instantly before publishing.
+  </Card>
+</Columns>
+
+## Benefits for Project Teams
+
+You gain efficiency by centralizing documentation, which cuts down search time and ensures everyone accesses the latest versions. Teams report faster onboarding for new members—reduce ramp-up from weeks to days. Collaboration features foster knowledge sharing, minimizing silos.
+
+For developers, integrate docs with code repos via webhooks to `https://api.example.com/docs/webhook`. Project managers appreciate analytics on doc views and engagement.
+
+<Callout kind="tip">
+  Start small: Migrate one project to see 30% time savings on doc maintenance.
+</Callout>
+
+## Quick Start
+
+Follow these steps to set up your first documentation space:
+
+<Steps>
+  <Step title="Sign Up" icon="user-plus">
+    Visit `https://dashboard.example.com` and create an account with your email.
+  </Step>
+  <Step title="Create a Space" icon="folder-plus">
+    Click "New Space" and name it for your project, like "MyApp Docs".
+  </Step>
+  <Step title="Add Your First Doc" icon="file-plus">
+    Create a new page and start writing in markdown.
+
+````markdown
+# Welcome to MyApp
+
+This is your project hub.
+
+- [Quickstart](/quickstart)
+- [API Reference](/authentication)
+````
+
+  </Step>
+  <Step title="Invite Collaborators" icon="mail">
+    Share the space link or add emails via the settings panel.
+  </Step>
+</Steps>
+
+## Next Steps
+
+Dive deeper into Chamely with these guides:
+
+<Columns cols={2}>
+  <Card title="Quickstart Guide" icon="zap" href="/quickstart">
+    Set up your first project in under 5 minutes.
+  </Card>
+  <Card title="Authentication" icon="shield" href="/authentication">
+    Secure your spaces with API keys and OAuth.
+  </Card>
+  <Card title="Configuration" icon="settings" href="/configuration">
+    Customize workflows and integrations.
+  </Card>
+  <Card title="Changelog" icon="git-branch" href="/changelog">
+    Stay updated with the latest releases.
+  </Card>
+</Columns>
+
+<Tabs>
+  <Tab title="Developers" icon="code">
+    Integrate via API:
+
+````javascript
+const response = await fetch('https://api.example.com/spaces', {
+  method: 'POST',
+  headers: { Authorization: `Bearer ${YOUR_API_KEY}` },
+  body: JSON.stringify({ name: 'New Space' })
+});
+````
+
+  </Tab>
+  <Tab title="Teams" icon="users">
+    Use the dashboard for visual management at `https://dashboard.example.com`.
+  </Tab>
+</Tabs>

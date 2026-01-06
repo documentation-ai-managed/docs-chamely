@@ -1,0 +1,144 @@
+---
+title: Changelog
+description: Review the version history of Chamely, including recent updates, new features, and improvements.
+---
+
+## Overview
+
+Chamely evolves quickly to help you manage project documentation effectively. Review the latest releases below to see new features, improvements, and fixes. Each release includes detailed changelogs grouped by category.
+
+<Columns cols={3}>
+  <Card title="v1.3.0" icon="zap" href="#v130">
+    Latest release with AI enhancements.
+  </Card>
+  <Card title="v1.2.0" icon="star" href="#v120">
+    Real-time collaboration features.
+  </Card>
+  <Card title="v1.1.0" icon="package" href="#v110">
+    Performance optimizations.
+  </Card>
+</Columns>
+
+## Recent Releases
+
+<Update label="2024-10-25" description="v1.3.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Added AI-powered search summaries for documentation pages
+- Introduced custom brand color picker (default: `#3B82F6`)
+- Support for embeddable documentation widgets
+
+## Improvements
+
+- Enhanced export options including PDF with custom styles
+- Faster page rendering for large documentation sites
+
+## Bug Fixes
+
+- Fixed markdown parsing issues with nested lists
+- Resolved mobile responsiveness for navigation sidebar
+
+</Update>
+
+<Update label="2024-10-10" description="v1.2.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Real-time collaborative editing for teams
+- Version history and rollback for pages
+- Integrated webhook support for deployments
+
+## Bug Fixes
+
+- Corrected image upload failures on certain browsers
+- Fixed anchor link jumping in long documents
+- Patched security vulnerability in public page sharing
+
+</Update>
+
+<Update label="2024-09-20" description="v1.1.0" tags={["improvement", "bugfix"]}>
+
+## Improvements
+
+- Optimized database queries for 50% faster searches
+- Added keyboard shortcuts for common actions like `<kbd>Ctrl</kbd>+<kbd>S</kbd>`
+
+## Bug Fixes
+
+- Repaired broken syntax highlighting in code blocks
+- Fixed table rendering overflows on narrow screens
+
+</Update>
+
+## How to Upgrade
+
+Upgrade Chamely to the latest version using your preferred package manager. Always back up your documentation site first.
+
+<Steps>
+  <Step title="Backup Your Site" icon="database">
+
+    Export your current documentation:
+
+````bash
+chamely export --output ./backup
+````
+
+  </Step>
+  <Step title="Update Package" icon="package">
+    <Tabs>
+      <Tab title="npm" icon="nodejs">
+````bash
+npm update chamely
+````
+      </Tab>
+      <Tab title="yarn" icon="package">
+````bash
+yarn upgrade chamely
+````
+      </Tab>
+      <Tab title="pnpm" icon="archive">
+````bash
+pnpm update chamely
+````
+      </Tab>
+    </Tabs>
+  </Step>
+  <Step title="Restart Server" icon="refresh-cw">
+
+    Restart your Chamely instance:
+
+````bash
+chamely start --port 3000
+````
+
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  Check the [release notes](https://github.com/chamely/releases) for migration guides if you encounter breaking changes.
+</Callout>
+
+## Upcoming Changes
+
+Stay ahead with planned features.
+
+<ExpandableGroup>
+  <Expandable title="v1.4.0 Preview" default-open="true">
+
+    - Multi-language documentation support
+    - Advanced analytics dashboard
+    - Plugin system for custom integrations
+
+  </Expandable>
+  <Expandable title="Future Roadmap">
+
+    - Full GitHub integration for version control
+    - Enterprise SSO and role-based access
+
+  </Expandable>
+</ExpandableGroup>
+
+<Callout kind="info">
+  Subscribe to our newsletter or watch the GitHub repo to get notified of new releases. Contribute via pull requests!
+</Callout>

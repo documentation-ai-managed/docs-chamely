@@ -1,0 +1,184 @@
+---
+title: Integrations with Chamely
+description: Connect Chamely to third-party tools to streamline your documentation workflow and enhance productivity.
+---
+
+## Overview
+
+Chamely integrates seamlessly with popular third-party services to automate your documentation processes. You can set up webhooks for real-time notifications, embed external content directly into your docs, and sync changes with version control systems. These integrations help you maintain up-to-date documentation without manual effort.
+
+<Callout kind="tip">
+  Start with webhooks for event-driven automation, then explore embeds and VCS sync for richer workflows.
+</Callout>
+
+## Popular Integrations
+
+Discover key integrations that enhance Chamely's capabilities. Use these to notify teams, automate deployments, and visualize data.
+
+<Columns cols={3}>
+  <Card title="Slack" icon="message-circle" href="https://slack.com" target="_blank">
+    Receive instant notifications for doc updates and reviews.
+  </Card>
+  <Card title="GitHub" icon="github" href="https://github.com" target="_blank">
+    Sync repositories and trigger builds on doc changes.
+  </Card>
+  <Card title="Zapier" icon="zap" href="https://zapier.com" target="_blank">
+    Connect to 5000+ apps without coding.
+  </Card>
+</Columns>
+
+## Setting Up Webhooks
+
+Webhooks allow Chamely to send real-time events to your endpoint. Follow these steps to configure one.
+
+<Steps>
+  <Step title="Create Webhook" icon="plus">
+    Navigate to your Chamely dashboard > Settings > Webhooks. Click "New Webhook".
+  </Step>
+  <Step title="Add Endpoint URL" icon="link">
+    Enter your secure HTTPS endpoint, such as `https://your-webhook-url.com/webhook`.
+  </Step>
+  <Step title="Select Events" icon="bell">
+    Choose events like `doc.updated` or `doc.published`.
+  </Step>
+  <Step title="Save and Test" icon="play">
+    Save the webhook and trigger a test event.
+  </Step>
+</Steps>
+
+Configure the payload using these parameters:
+
+<ParamField path="event" param-type="string" required="true">
+  The event type, e.g., `doc.updated`.
+</ParamField>
+
+<ParamField body="data" param-type="object" required="true">
+  Details of the changed document.
+</ParamField>
+
+<ParamField header="X-Chamely-Signature" param-type="string" required="false">
+  HMAC signature for verification.
+</ParamField>
+
+## Webhook Payload Example
+
+Handle incoming webhooks from Chamely in your server.
+
+<CodeGroup tabs="Node.js,Python">
+  ```javascript
+  const express = require('express');
+  const crypto = require('crypto');
+  const app = express();
+  app.use(express.json());
+
+  app.post('/webhook', (req, res) => {
+    const signature = req.headers['x-chamely-signature'];
+    const payload = JSON.stringify(req.body);
+    const expectedSig = 'sha256=' + crypto.createHmac('sha256', 'YOUR_SECRET').update(payload).digest('hex');
+
+    if (signature === expectedSig) {
+      console.log('Event:', req.body.event);
+      console.log('Data:', req.body.data);
+      res.status(200).send('OK');
+    } else {
+      res.status(401).send('Unauthorized');
+    }
+  });
+
+  app.listen(3000);
+  ```
+  ```python
+  from flask import Flask, request, abort
+  import hmac
+  import hashlib
+  import json
+
+  app = Flask(__name__)
+  SECRET = b'YOUR_SECRET'
+
+  @app.route('/webhook', methods=['POST'])
+  def webhook():
+      signature = request.headers.get('X-Chamely-Signature')
+      payload = request.get_data()
+      
+      expected = hmac.new(SECRET, payload, hashlib.sha256).hexdigest()
+      if signature != f'sha256={expected}':
+          abort(401)
+      
+      data = request.json
+      print(f"Event: {data['event']}")
+      print(f"Data: {data['data']}")
+      return 'OK', 200
+
+  if __name__ == '__main__':
+      app.run(port=3000)
+  ```
+</CodeGroup>
+
+<Callout kind="alert">
+  Always verify webhook signatures to prevent spoofing. Use a strong secret and HTTPS endpoints.
+</Callout>
+
+## Embedding External Resources
+
+Embed live content from other services into your Chamely docs for dynamic updates.
+
+<Tabs>
+  <Tab title="GitHub Gist" icon="code">
+    Use an iframe to embed code snippets:
+    
+    ```
+    <iframe src="https://gist.github.com/user/abc123.js" width="100%" height="400"></iframe>
+    ```
+  </Tab>
+  <Tab title="Figma" icon="figma">
+    Embed designs directly:
+    
+    ```
+    <iframe src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/xyz" width="100%" height="600"></iframe>
+    ```
+  </Tab>
+  <Tab title="Google Docs" icon="file-text">
+    Share collaborative docs:
+    
+    ```
+    <iframe src="https://docs.google.com/document/d/abc123/embed" width="100%" height="500"></iframe>
+    ```
+  </Tab>
+</Tabs>
+
+## Syncing with Version Control
+
+Automate doc updates from your Git repos.
+
+<Tabs>
+  <Tab title="GitHub" icon="github">
+    <Steps>
+      <Step title="Connect Repo">
+        In Chamely, go to Integrations > GitHub and authorize.
+      </Step>
+      <Step title="Select Branch">
+        Choose `main` or your default branch.
+      </Step>
+      <Step title="Map Paths">
+        Link `/docs/*` to Chamely pages.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="GitLab" icon="git-branch">
+    Similar setup via OAuth.
+    
+    ```yaml
+    # .gitlab-ci.yml
+    chamely_sync:
+      script:
+        - curl -X POST https://api.example.com/v1/sync \
+          -H "Authorization: Bearer YOUR_TOKEN" \
+          -d '{"repo": "your/repo", "branch": "main"}'
+    ```
+  </Tab>
+</Tabs>
+
+<Expandable title="Advanced Sync Options" default-open="false">
+  Use webhooks from your VCS to trigger Chamely rebuilds on push events. Set payload to include commit SHA and changed files.
+</Expandable>

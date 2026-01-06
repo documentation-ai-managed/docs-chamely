@@ -1,0 +1,117 @@
+---
+title: Chamely Features
+description: Explore the core capabilities of Chamely for seamless documentation management and collaboration.
+---
+
+## Overview
+
+Chamely empowers you to manage project documentation with ease. You organize content hierarchically, collaborate in real-time, track versions automatically, and navigate efficiently. These features streamline your workflow from creation to maintenance.
+
+<Columns cols={2}>
+  <Card title="Content Organization" icon="folder-tree" href="#content-organization">
+    Build structured docs with nested pages and sections.
+  </Card>
+  <Card title="Real-time Collaboration" icon="users" href="#collaboration">
+    Edit docs together with live updates.
+  </Card>
+  <Card title="Versioning" icon="git-branch" href="#versioning">
+    Track changes and revert with full history.
+  </Card>
+  <Card title="Search & Navigation" icon="search" href="#search-navigation">
+    Find content instantly across your docs.
+  </Card>
+</Columns>
+
+## Content Organization and Hierarchy
+
+You structure your documentation using folders, pages, and subpages. Create a clear hierarchy that mirrors your project's architecture. Drag and drop pages to reorder, and use frontmatter for metadata.
+
+<Steps>
+  <Step title="Create Structure" icon="folder-plus">
+    Start with a root workspace. Add pages via the sidebar.
+
+````markdown
+# docs/workspace.mdx
+---
+title: Workspace Overview
+tags: ["core", "intro"]
+---
+## Quick Start
+```
+````
+  </Step>
+  <Step title="Nest Pages" icon="folder">
+    Right-click to nest subpages for deeper organization.
+  </Step>
+  <Step title="Publish Hierarchy" icon="globe">
+    Your site reflects the exact folder structure.
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  Use `tags` in frontmatter to categorize pages dynamically.
+</Callout>
+
+## Collaboration and Real-time Editing
+
+Invite team members to co-edit docs live. Changes appear instantly, with cursors showing who edits what. Resolve conflicts automatically during merges.
+
+<Tabs>
+  <Tab title="Web Editor" icon="globe">
+    Access at `https://dashboard.example.com/docs` for browser-based editing.
+  </Tab>
+  <Tab title="Git Sync" icon="git-branch">
+    Push changes via Git for version-controlled collaboration.
+
+````bash
+git add docs/
+git commit -m "Update features"
+git push origin main
+````
+  </Tab>
+</Tabs>
+
+## Versioning and History Tracking
+
+Chamely tracks every change with Git under the hood. View diffs, blame, and revert commits easily.
+
+<CodeGroup tabs="CLI,API">
+````bash
+# View history
+chamely history docs/features.mdx
+````
+
+```javascript
+// Fetch versions via API
+const versions = await fetch('https://api.example.com/v1/docs/features.mdx/versions');
+```
+</CodeGroup>
+
+<Expandable title="Advanced Version Control" default-open="false">
+  Integrate with GitHub for pull requests and reviews.
+
+  ```javascript
+  // Webhook for auto-sync
+  {
+    "event": "push",
+    "repo": "your-docs-repo",
+    "branch": "main"
+  }
+  ```
+</Expandable>
+
+## Search and Navigation Tools
+
+Search across all docs with fuzzy matching. Use table of contents, breadcrumbs, and sidebar navigation for quick access.
+
+| Feature | Description | Shortcut |
+|---------|-------------|----------|
+| Global Search | Finds across workspaces | `<kbd>Ctrl</kbd>+<kbd>K</kbd>` |
+| Page TOC | Auto-generated outline | Sidebar toggle |
+| Breadcrumbs | Path navigation | Top bar |
+
+Navigate hierarchies effortlessly. Pin frequent pages for faster access.
+
+<Callout kind="info">
+  Search indexes frontmatter `title` and `description` fields first for relevance.
+</Callout>
